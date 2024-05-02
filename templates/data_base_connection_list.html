@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="{{url_for('data_base_connection.data_base_connection_post')}}" class="button button-warning pd-5">Додати нове підключення</a>
+ <h1 class="">Підключені бази даних</h2>
+  <div class="d-inline-flex justify-content-center">
+  <table class="table table-striped table-responsive">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Назва підключення</th>
+        <th>Хост</th>
+        <th>Порт</th>
+        <th>Username</th>
+        <th>Обрана</th>
+        <th colspan="2">Дії</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if db_connections %}
+        {% for connection in db_connections %}
+          <tr>
+            <td>{{ connection.id }}</td>
+            <td>{{ connection.name }}</td>
+            <td>{{ connection.host }}</td>
+            <td>{{ connection.port }}</td>
+            <td>{{ connection.username }}</td>
+            <td>{{ connection.is_main }}</td>
+            {% if not connection.is_main %}
+            <td>
+              <form method="POST" action="/data_base_connection/{{connection.id}}">
+                <input type="submit" class="button button-danger" value="Обрати">
+                </form>
+            </td>
+            {% endif %}
+            <td>
+              <a href="{{ url_for('data_base_connection.data_base_connection_delete', id=connection.id) }}" class="button button-danger">Видалити</a>
+            </td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="5">Нажаль, підключень немає</td>
+        </tr>
+      {% endif %}
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+  </div>
+{% endblock %}

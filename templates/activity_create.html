@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h2 class="mb-4">Add activity</h2>
+  <div class = "d-inline-flex justify-content-center">
+    
+  <form method="POST" action="/activity/add">
+    <div class="form-row">
+      <div class="col-md-20 mb-3">
+        <label for="type">Activity Type</label>
+        <select id="type" name="type">
+          <option value="Running">Running</option>
+          <option value="Walking">Walking</option>
+          <option value="Swimming1">Swimming(General)</option>
+          <option value="Swimming2">Swimming(Vigorous)</option>
+          <option value="Light Workout">Light Workout(Yoga, Stretching)</option>
+          <option value="Intensive Workout">Intensive Workout(CrossFit, HIIT)</option>
+        </select>
+      </div>
+      <div class="col-md-20 mb-3">
+        <label for="activity_time">Duration</label>
+        <input type="number" class="form-control" id="activity_time" name="activity_time" placeholder="Enter Activity Duration" required>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Save Activity</button>
+  </form>
+
+  </div>
+
+{% endblock %}
